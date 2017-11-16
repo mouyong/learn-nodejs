@@ -131,9 +131,12 @@ const MenuCreate = async (ctx, next) => {
   if (null == access_token || access_token == '') {
     ctx.throw(404, 'access token Not Found')
   }
-  let content = `["测5试", "${encodeURI('http://test')}"]`
+  // let content = `["测5试", "${encodeURI('http://test')}"]`
+  let content = new Array(`${encodeURIComponent('测5试')}`, `${encodeURIComponent('http://test')}`)
+  img_url='http://www.hilw.cn/X15.png'
 
-  data = `${genSign({...data, access_token, machine_code})}&content=${content}`
+  // data = `${genSign({...data, access_token, machine_code})}&content=${content}`
+  data = `${genSign({...data, access_token, machine_code, content})}`
 
   let url = `${urls.base}${urls.menuCreate}`
 
@@ -354,4 +357,4 @@ app.use(handler)
     ctx.redirect('/')
   })
 
-app.listen(3000)
+app.listen(3001)
